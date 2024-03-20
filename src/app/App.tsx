@@ -1,13 +1,15 @@
-import { Header } from '@/widgets/Header/Header.tsx'
-import MainPage from '@/pages/MainPage/MainPage.tsx'
+import { Header } from '@/widgets/Header/Header.tsx';
+import MainPage from '@/pages/MainPage/MainPage.tsx';
+import Professions from '@/pages/Professions/Professions.tsx';
 
 function App() {
     return (
         <>
             <Header />
-            <MainPage />
+            {/*<MainPage />*/}
+            <Professions />
         </>
-    )
+    );
 }
 
-export default App
+export default App;
