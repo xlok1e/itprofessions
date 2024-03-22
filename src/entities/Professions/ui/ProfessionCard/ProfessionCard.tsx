@@ -1,6 +1,6 @@
 import { Zap } from 'lucide-react';
 import { FC } from 'react';
-import { ProfessionCardInterface } from '@/widgets/ProfessionCard/types.ts';
+import { ProfessionCardInterface } from '@/entities/Professions/ui/ProfessionCard/types.ts';
 
 const ProfessionCard: FC<ProfessionCardInterface> = ({
     title,
@@ -16,7 +16,7 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
         >
             <div className="flex flex-col justify-between w-full">
                 <div className="flex flex-col gap-[5px]">
-                    <p className="text-white text-[16px] flex-1">
+                    <p className="text-white text-[16px] flex-1 text-start">
                         Востребованность на рынке
                     </p>
                     <div className="flex gap-[5px] flex-1">
@@ -73,9 +73,11 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
                         )}
                     </div>
                 </div>
-                <div className="flex text-white items-center justify-between">
-                    <p className="font-bold text-[22px] w-[80%]">{title}</p>
-                    <div>
+                <div className="flex text-white items-end justify-between">
+                    <p className="font-bold text-[16px] w-[70%] text-start">
+                        {title}
+                    </p>
+                    <div className="text-end">
                         <p className="font-medium">Зарплата:</p>
                         <p className="text-[14px]">{salary}</p>
                     </div>
