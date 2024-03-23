@@ -1,15 +1,17 @@
 import { Header } from '@/widgets/Header/Header.tsx';
-// import MainPage from '@/pages/MainPage/MainPage.tsx';
+import { Routes, Route } from 'react-router-dom';
+import MainPage from '@/pages/MainPage/MainPage.tsx';
 import Professions from '@/pages/Professions/Professions.tsx';
-import { ProfessionModal } from '@/widgets/ProfessionModal/ProfessionModal.tsx';
 
 function App() {
     return (
         <>
             <Header />
-            {/*<MainPage />*/}
-            <Professions />
-            {/*<ProfessionModal />*/}
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/professions" element={<Professions />} />
+                <Route path="*" element={<div>Not Found</div>} />
+            </Routes>
         </>
     );
 }

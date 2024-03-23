@@ -7,12 +7,15 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <div className="bg-[#0F0E0B] border-b-[1px] border-[white]/10 sticky top-0 z-[999]">
+        <div className="bg-[#0F0E0B]/90 border-b-[1px] border-[white]/10 fixed w-full z-[999] backdrop-blur">
             <div className="container flex justify-between items-center pt-[17px] pb-[17px] h-[60px] gap-[20px]">
-                <div className="text-white text-[30px] font-bold">LOGO</div>
+                <Link to={`/`}>
+                    <div className="text-white text-[30px] font-bold">LOGO</div>
+                </Link>
                 <nav className="text-white">
                     <NavigationMenu>
                         <NavigationMenuList className="flex gap-9">
