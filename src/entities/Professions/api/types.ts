@@ -10,6 +10,7 @@ export interface ProfessionInterface {
     level: levels;
     enter: string;
     salary: string;
+    salaryText?: string;
 }
 
 export interface CategoryInterface {
