@@ -12,9 +12,13 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
     return (
         <div
             onClick={onClick}
-            className={`${style} flex flex-col justify-between w-[560px] h-[200px] border-white/40 bg-gray-400/5 border-[0.5px] rounded-[11px] p-[18px]`}
+            className={`${style} flex flex-col justify-between w-[49%] h-[200px] border-white/40 bg-gray-400/5 border-[0.5px] rounded-[11px] p-[18px]
+            max-[1000px]:w-[100%]`}
         >
-            <p className="font-bold text-[22px] text-start text-white">
+            <p
+                className="font-bold text-[22px] text-start text-white
+            max-[1295px]:text-[20px]"
+            >
                 {title}
             </p>
             <div className="flex flex-col gap-[5px]">

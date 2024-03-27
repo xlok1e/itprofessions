@@ -2,97 +2,109 @@ import { ProfessionDescriptionInterface } from '@/widgets/ProfessionModal/types.
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from '@/components/ui/dialog';
 import { Zap } from 'lucide-react';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { fetchCategories } from '@/entities/Professions/api/api.ts';
+import { CategoryInterface } from '@/entities/Professions/api/types.ts';
 
-const ProfessionModal: FC<ProfessionDescriptionInterface> = ({
-    trigger,
-    id,
-    name,
-    enter,
-    learn,
-    level,
-    salary,
-    skills,
-    work,
-    description,
-    category,
-    salaryText,
-}) => {
+const ProfessionModal: FC<ProfessionDescriptionInterface> = ({ id, close }) => {
+    const [categories, setCategories] = useState<CategoryInterface[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchCategories();
+                setCategories(data);
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        };
+
+        // Вызов функции fetchData, обработка успешного выполнения и ошибок
+        fetchData();
+    }, []);
+
+    const filteredData = categories
+        .flatMap((category) => category.professions)
+        .find((profession) => profession.id === id);
+
     return (
-        <Dialog>
-            <DialogTrigger className="outline-none">{trigger}</DialogTrigger>
-            <DialogContent className="max-w-[calc(100vw-200px)] overflow-y-scroll max-h-[calc(100vh-100px)]">
-                <DialogHeader>
-                    <DialogTitle className="text-[30px] text-white">
-                        {name}
-                    </DialogTitle>
-                    <DialogDescription className="text-[18px] text-gray-400">
-                        {category}
-                    </DialogDescription>
-                </DialogHeader>
+        <Dialog open={id > 0} onOpenChange={close}>
+            {filteredData && (
+                <DialogContent
+                    className="max-w-[calc(100vw-200px)] overflow-y-scroll max-h-[calc(100vh-100px)]
+                max-[900px]:max-w-full max-[900px]:max-h-full max-[900px]:rounded-[0px] max-[900px]:border-none"
+                >
+                    <DialogHeader>
+                        <DialogTitle className="text-[30px] text-white text-left">
+                            {filteredData.name}
+                        </DialogTitle>
+                    </DialogHeader>
 
-                <div className="flex gap-[140px] justify-between text-[18px]">
-                    <div className="flex flex-col gap-[20px] text-white leading-[165%]">
-                        <p>{description}</p>
-                        <div className="flex flex-col gap-[5px]">
-                            <p className="font-bold text-[20px]">
-                                Необходимые знания:
-                            </p>
-                            <p className="whitespace-pre-wrap">{skills}</p>
+                    <div
+                        className="flex gap-[140px] justify-between text-[18px]
+                    max-[1130px]:flex-col max-[1130px]:gap-[20px]"
+                    >
+                        <div className="flex flex-col gap-[20px] text-white leading-[165%]">
+                            <p>{filteredData.description}</p>
+                            <InfoSection
+                                title="Необходимые знания:"
+                                content={filteredData.skills}
+                            />
+                            <InfoSection
+                                title="Где работают:"
+                                content={filteredData.work}
+                            />
+                            <InfoSection
+                                title="На кого учиться:"
+                                content={filteredData.learn}
+                            />
+                            <InfoSection
+                                title="Заработная плата:"
+                                content={filteredData.salaryText}
+                            />
                         </div>
-                        <div className="flex flex-col gap-[5px]">
-                            <p className="font-bold text-[20px]">
-                                Где работают:
-                            </p>
-                            <p className="whitespace-pre-wrap">{work}</p>
-                        </div>
-                        <div className="flex flex-col gap-[5px]">
-                            <p className="font-bold text-[20px]">
-                                На кого учиться:
-                            </p>
-                            <p className="whitespace-pre-wrap">{learn}</p>
-                        </div>
-                        <div className="flex flex-col gap-[5px]">
-                            <p className="font-bold text-[20px]">
-                                Заработная плата:
-                            </p>
-                            <p className="whitespace-pre-wrap">{salaryText}</p>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-[23px] ">
-                        <div className="flex flex-col text-white gap-[5px]">
-                            <p className="text-[23px]">Восстребованность</p>
-                            <div className="flex gap-[9px] items-center justify-center w-[260px] h-[90px] bg-gradient-to-br from-[#EAB308]/50 to-[#271E00]/40 rounded-[18px]">
-                                <Zap size={50} />
-                                <Zap size={50} />
-                                <Zap size={50} />
-                            </div>
-                        </div>
-                        <div className="flex flex-col text-white gap-[5px]">
-                            <p className="text-[23px]">Порог входа</p>
-                            <div className="flex gap-[9px] items-center justify-center w-[260px] h-[90px] bg-gradient-to-br from-[#EAB308]/50 to-[#271E00]/40 rounded-[18px]">
-                                <Zap size={50} />
-                                <Zap size={50} />
-                                <Zap size={50} />
-                            </div>
-                        </div>
-                        <div className="flex flex-col text-white gap-[5px]">
-                            <p className="text-[23px]">Зарплата</p>
-                            <div className="flex gap-[9px] items-center justify-center w-[260px] h-[90px] bg-gradient-to-br from-[#EAB308]/50 to-[#271E00]/40 rounded-[18px]">
-                                <p className="text-[30px]">{salary}</p>
+                        <div className="flex flex-col gap-[23px] ">
+                            <StatSection title="Восстребованность" />
+                            <StatSection title="Порог входа" />
+                            <div className="flex flex-col text-white gap-[5px]">
+                                <p className="text-[23px]">Зарплата</p>
+                                <div className="flex gap-[9px] items-center justify-center w-[260px] h-[90px] bg-gradient-to-br from-[#EAB308]/50 to-[#271E00]/40 rounded-[18px]">
+                                    <p className="text-[30px]">
+                                        {filteredData.salary}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </DialogContent>
+                </DialogContent>
+            )}
         </Dialog>
     );
 };
+
+const InfoSection: FC<{
+    title: string | undefined;
+    content: string | undefined;
+}> = ({ title, content }) => (
+    <div className="flex flex-col gap-[5px]">
+        <p className="font-bold text-[20px]">{title}</p>
+        <p className="whitespace-pre-wrap">{content}</p>
+    </div>
+);
+
+const StatSection: FC<{ title: string }> = ({ title }) => (
+    <div className="flex flex-col text-white gap-[5px]">
+        <p className="text-[23px]">{title}</p>
+        <div className="flex gap-[9px] items-center justify-center w-[260px] h-[90px] bg-gradient-to-br from-[#EAB308]/50 to-[#271E00]/40 rounded-[18px]">
+            <Zap size={50} />
+            <Zap size={50} />
+            <Zap size={50} />
+        </div>
+    </div>
+);
 
 export { ProfessionModal };

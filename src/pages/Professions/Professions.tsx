@@ -14,6 +14,7 @@ const Professions = () => {
     // Состояния для данных категорий и статуса загрузки
     const [categories, setCategories] = useState<CategoryInterface[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [clickedProfession, setClickedProfession] = useState(0);
 
     // Получение данных категорий при монтировании компонента
     useEffect(() => {
@@ -38,56 +39,44 @@ const Professions = () => {
             });
     }, []);
 
-    // Логирование данных категорий для отладки
-    console.log(categories);
+    const handleOpenProfessionModal = (id: number) => {
+        setClickedProfession(id);
+    };
+
+    const handleCloseProfessionModal = () => {
+        setClickedProfession(0);
+    };
 
     return (
         <div className="bg-gradient-to-br from-[#0E0C0A] to-[#26211B]">
-            <div className="container">
-                {isLoading ? (
-                    // UI для состояния загрузки
-                    <div className="flex">
-                        <p className="items-center justify-center">
-                            Загрузка...
-                        </p>
-                    </div>
-                ) : (
-                    // Отображение категорий с эффектом свечения после загрузки данных
-                    <GlowCapture>
-                        <Glow className="pl-[30px] pr-[30px] pb-[26px] mt-[60px]">
-                            {categories.map((category, index) => (
-                                <Glow
-                                    className="flex flex-col pl-[30px] pr-[30px]"
-                                    key={index}
-                                >
-                                    <div
-                                        className={`flex sticky top-[65px] bg-[#0E0C0A]/80 backdrop-blur text-white border-[1px] border-[white]/80 rounded-[7px] items-center justify-center max-h-[50px] mt-[26px] pointer-events-none select-none`}
+            <GlowCapture>
+                <Glow className="pb-[26px] mt-[60px] ">
+                    <div className="container max-w-[1440px] max-[540px]:px-[30px]">
+                        {isLoading ? (
+                            // UI для состояния загрузки
+                            <div className="flex">
+                                <p className="items-center justify-center">
+                                    Загрузка...
+                                </p>
+                            </div>
+                        ) : (
+                            <div>
+                                {categories.map((category, index) => (
+                                    <Glow
+                                        className="flex flex-col "
+                                        key={index}
                                     >
-                                        <h1 className="text-[22px] font-medium">
-                                            {category.category}
-                                        </h1>
-                                    </div>
-                                    <div className="flex gap-y-[25px] justify-between pt-[26px] flex-1 flex-wrap ">
-                                        {category.professions.map(
-                                            (profession) => (
-                                                // Отображение модального окна для каждой профессии
-                                                <ProfessionModal
-                                                    id={profession.id}
-                                                    salaryText={
-                                                        profession.salaryText
-                                                    }
-                                                    category={category.category}
-                                                    name={profession.name}
-                                                    description={
-                                                        profession.description
-                                                    }
-                                                    learn={profession.learn}
-                                                    skills={profession.skills}
-                                                    work={profession.work}
-                                                    level={profession.level}
-                                                    enter={profession.enter}
-                                                    salary={profession.salary}
-                                                    trigger={
+                                        <div
+                                            className={`flex sticky top-[65px] bg-[#0E0C0A]/80 backdrop-blur text-white border-[1px] border-[white]/80 rounded-[7px] items-center justify-center max-h-[50px] mt-[26px] pointer-events-none select-none`}
+                                        >
+                                            <h1 className="text-[22px] font-medium">
+                                                {category.category}
+                                            </h1>
+                                        </div>
+                                        <div className="flex gap-y-[25px] justify-between pt-[26px] flex-1 flex-wrap ">
+                                            {category.professions.map(
+                                                (profession) => (
+                                                    <>
                                                         <ProfessionCard
                                                             key={profession.id}
                                                             style={glowStyle}
@@ -100,18 +89,27 @@ const Professions = () => {
                                                             salary={
                                                                 profession.salary
                                                             }
+                                                            onClick={() =>
+                                                                handleOpenProfessionModal(
+                                                                    profession.id
+                                                                )
+                                                            }
                                                         />
-                                                    }
-                                                />
-                                            )
-                                        )}
-                                    </div>
-                                </Glow>
-                            ))}
-                        </Glow>
-                    </GlowCapture>
-                )}
-            </div>
+                                                    </>
+                                                )
+                                            )}
+                                        </div>
+                                    </Glow>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </Glow>
+            </GlowCapture>
+            <ProfessionModal
+                id={clickedProfession}
+                close={handleCloseProfessionModal}
+            />
         </div>
     );
 };

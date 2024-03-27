@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
     return (
         <div className="bg-[#0F0E0B]/90 border-b-[1px] border-[white]/10 fixed w-full z-[1] backdrop-blur">
-            <div className="container flex justify-between items-center pt-[17px] pb-[17px] h-[60px] gap-[20px]">
+            <div className="container max-w-[1440px] flex justify-between items-center pt-[17px] pb-[17px] h-[60px] gap-[20px]">
                 <Link to={`/`}>
                     <div className="text-white text-[30px] font-bold">LOGO</div>
                 </Link>
