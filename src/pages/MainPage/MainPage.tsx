@@ -14,12 +14,12 @@ const MainPage = () => {
             />
             <img
                 src={Wave2}
-                className="absolute top-[20%] left-[60%]"
+                className="absolute top-[22%] left-[60%] "
                 alt="Wave 2"
             />
             <div className="absolute -z-1 m-auto top-0 left-0 bottom-0 right-0 w-[450px] h-[450px] rounded-full mix-blend-overlay bg-[#FACC15] opacity-[55%] blur-[105px]"></div>
             <div className="flex items-center justify-center h-[calc(100vh)] bg-gradient-to-br from-[#0E0C0A] to-[#26211B]">
-                <div className="flex z-[1] flex-col items-center">
+                <div className="flex z-[1] flex-col items-center mt-[50px]">
                     <h1 className="text-white font-bold text-[64px]">
                         Атлас IT-профессий
                     </h1>
