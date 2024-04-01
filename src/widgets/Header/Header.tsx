@@ -21,8 +21,27 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Menu } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { CategoryInterface } from '@/entities/Professions/api/types.ts';
+import { fetchCategories } from '@/entities/Professions/api/api.ts';
+import { HashLink } from 'react-router-hash-link';
 
 const Header = () => {
+    const [categories, setCategories] = useState<CategoryInterface[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchCategories();
+                setCategories(data);
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <div className="bg-[#0F0E0B]/90 border-b-[1px] border-[white]/10 fixed w-full z-[1] backdrop-blur">
             <div className="container max-w-[1440px] max-[540px]:px-[30px] flex justify-between items-center pt-[17px] pb-[17px] h-[60px] gap-[20px]">
@@ -34,19 +53,20 @@ const Header = () => {
                         <NavigationMenuList className="flex gap-9">
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger className="p-[5px]">
-                                    Профессии
+                                    <Link to={`/professions`}>Профессии</Link>
                                 </NavigationMenuTrigger>
 
                                 <NavigationMenuContent className="flex flex-col w-fit h-fit p-[16px] text-[18px]">
-                                    <NavigationMenuLink className="p-[5px] hover:bg-gray-200 rounded-[5px]">
-                                        Разработка
-                                    </NavigationMenuLink>
-                                    <NavigationMenuLink className="p-[5px] hover:bg-gray-200 rounded-[5px]">
-                                        Менеджмент
-                                    </NavigationMenuLink>
-                                    <NavigationMenuLink className="p-[5px] hover:bg-gray-200 rounded-[5px]">
-                                        Дизайн
-                                    </NavigationMenuLink>
+                                    {categories.map((category) => (
+                                        <NavigationMenuLink className="p-[5px] hover:bg-gray-200 rounded-[5px] w-[200px]">
+                                            <HashLink
+                                                smooth
+                                                to={`/professions#${category.category}`}
+                                            >
+                                                {category.category}
+                                            </HashLink>
+                                        </NavigationMenuLink>
+                                    ))}
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
                             <Link
