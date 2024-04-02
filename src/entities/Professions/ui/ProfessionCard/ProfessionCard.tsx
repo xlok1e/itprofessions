@@ -13,20 +13,25 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
         <div
             onClick={onClick}
             className={`${style} flex flex-col justify-between w-[49%] h-[200px] border-white/40 bg-gray-400/5 border-[0.5px] rounded-[11px] p-[18px]
-            max-[1000px]:w-[100%]
-            max-[500px]:w-[100%]`}
+            max-[1000px]:w-[100%]`}
         >
             <p
                 className="font-bold text-[22px] text-start text-white
             max-[1295px]:text-[20px]
             max-[660px]:text-[18px]
             max-[500px]:text-[16px]
-            max-[660px]:w-[70%]"
+            max-[450px]:text-[14px]
+            max-[450px]:max-w-[70%]
+            max-[411px]:text-[12px]"
             >
                 {title}
             </p>
             <div className="flex flex-col gap-[5px]">
-                <p className="text-white text-[16px] flex-1 text-start">
+                <p
+                    className="text-white text-[16px] flex-1 text-start
+                max-[450px]:text-[14px]
+                max-[411px]:text-[12px]"
+                >
                     Востребованность на рынке
                 </p>
                 <div className="flex gap-[5px] flex-1">
@@ -83,8 +88,12 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
                     )}
                 </div>
                 <div className="flex flex-col text-white items-end">
-                    <p className="font-medium text-[16px]">Зарплата:</p>
-                    <p className="text-[14px]">{salary}</p>
+                    <p className="font-medium text-[16px] max-[411px]:text-[14px]">
+                        Зарплата:
+                    </p>
+                    <p className="text-[14px] max-[411px]:text-[12px]">
+                        {salary}
+                    </p>
                 </div>
             </div>
         </div>
