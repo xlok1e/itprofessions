@@ -54,10 +54,8 @@ const Professions = () => {
                     <div className="container max-w-[1440px] max-[660px]:px-[30px] ">
                         {isLoading ? (
                             // UI для состояния загрузки
-                            <div className="flex">
-                                <p className="items-center justify-center">
-                                    Загрузка...
-                                </p>
+                            <div className="flex h-screen items-center justify-center">
+                                <div className="h-10 w-10 animate-spin rounded-full border-[5px] border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
                             </div>
                         ) : (
                             <div>
