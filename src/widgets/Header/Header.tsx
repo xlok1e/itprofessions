@@ -103,7 +103,11 @@ const Header = () => {
                                 <Menu color="white" />
                             </SheetTrigger>
                             <SheetContent>
-                                <SheetHeader></SheetHeader>
+                                <SheetHeader>
+                                    <h2 className="flex text-white text-[30px] font-bold items-center justify-center mt-[15px]">
+                                        LOGO
+                                    </h2>
+                                </SheetHeader>
                                 <div className="flex flex-col mt-[30px]">
                                     <Link
                                         to={`/`}

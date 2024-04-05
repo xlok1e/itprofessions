@@ -1,10 +1,5 @@
 import { ProfessionDescriptionInterface } from '@/widgets/ProfessionModal/types.ts';
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Zap } from 'lucide-react';
 import { FC, useEffect, useState } from 'react';
 import { fetchCategories } from '@/entities/Professions/api/api.ts';
@@ -39,11 +34,9 @@ const ProfessionModal: FC<ProfessionDescriptionInterface> = ({ id, close }) => {
                     className="max-w-[calc(100vw-200px)] overflow-y-scroll max-h-[calc(100vh-100px)]
                 max-[900px]:max-w-full max-[900px]:max-h-full max-[900px]:rounded-[0px] max-[900px]:border-none"
                 >
-                    <DialogHeader>
-                        <DialogTitle className="text-[30px] text-white text-left">
-                            {filteredData.name}
-                        </DialogTitle>
-                    </DialogHeader>
+                    <h2 className="text-[30px] font-bold text-white text-left">
+                        {filteredData.name}
+                    </h2>
 
                     <div
                         className="flex gap-[140px] justify-between text-[18px]
@@ -71,8 +64,146 @@ const ProfessionModal: FC<ProfessionDescriptionInterface> = ({ id, close }) => {
                         <GlowCapture>
                             <Glow>
                                 <div className="flex flex-col gap-[23px] ">
-                                    <StatSection title="Восстребованность" />
-                                    <StatSection title="Порог входа" />
+                                    <div className="flex flex-col text-white gap-[5px]">
+                                        <p className="text-[23px]">
+                                            Востребованность
+                                        </p>
+                                        <div className="flex gap-[9px] items-center justify-center w-[260px] h-[90px] border border-white rounded-[18px]">
+                                            {filteredData.level === 1 && (
+                                                <>
+                                                    <Zap
+                                                        color="white"
+                                                        fill="green"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                </>
+                                            )}
+                                            {filteredData.level === 2 && (
+                                                <>
+                                                    <Zap
+                                                        color="white"
+                                                        fill="green"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        fill="yellow"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                </>
+                                            )}
+                                            {filteredData.level === 3 && (
+                                                <>
+                                                    <Zap
+                                                        color="white"
+                                                        fill="green"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        fill="yellow"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        fill="red"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col text-white gap-[5px]">
+                                        <p className="text-[23px]">
+                                            Порог вхождения:
+                                        </p>
+                                        <div className="flex gap-[9px] items-center justify-center w-[260px] h-[90px] border border-white rounded-[18px]">
+                                            {filteredData.enter === 1 && (
+                                                <>
+                                                    <Zap
+                                                        color="white"
+                                                        fill="green"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                </>
+                                            )}
+                                            {filteredData.enter === 2 && (
+                                                <>
+                                                    <Zap
+                                                        color="white"
+                                                        fill="green"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        fill="yellow"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                </>
+                                            )}
+                                            {filteredData.enter === 3 && (
+                                                <>
+                                                    <Zap
+                                                        color="white"
+                                                        fill="green"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        fill="yellow"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                    <Zap
+                                                        color="white"
+                                                        fill="red"
+                                                        size={50}
+                                                        strokeWidth={1}
+                                                    />
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
                                     <div className="flex flex-col text-white gap-[5px]">
                                         <p className="text-[23px]">Зарплата</p>
                                         <div className="flex gap-[9px] items-center justify-center w-[260px] h-[90px] border border-white rounded-[18px]">
@@ -98,17 +229,6 @@ const InfoSection: FC<{
     <div className="flex flex-col gap-[5px]">
         <p className="font-bold text-[20px] whitespace-pre-wrap">{title}</p>
         <p className="whitespace-pre-wrap">{content}</p>
-    </div>
-);
-
-const StatSection: FC<{ title: string }> = ({ title }) => (
-    <div className="flex flex-col text-white gap-[5px]">
-        <p className="text-[23px]">{title}</p>
-        <div className="flex gap-[9px] items-center justify-center w-[260px] h-[90px] border border-white rounded-[18px]">
-            <Zap size={50} />
-            <Zap size={50} />
-            <Zap size={50} />
-        </div>
     </div>
 );
 

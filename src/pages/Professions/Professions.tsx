@@ -5,9 +5,27 @@ import { useEffect, useState } from 'react';
 import { CategoryInterface } from '@/entities/Professions/api/types.ts';
 import { fetchCategories } from '@/entities/Professions/api/api.ts';
 import { ProfessionModal } from '@/widgets/ProfessionModal/ProfessionModal.tsx';
+import { motion } from 'framer-motion';
 
 // Пользовательский CSS стиль для эффекта свечения
-const glowStyle = 'glow:border-[#eab308] glow:bg-[#eab308]/10';
+const glowStyle =
+    'glow:border-[#eab308] glow:bg-[#eab308]/10 max-[1000px]:glow:border-none max-[1000px]:glow:bg-transparent';
+
+const animation = {
+    hidden: {
+        opacity: 0,
+        y: -7,
+    },
+    visible: (custom: number) => ({
+        y: 0,
+        opacity: 1,
+        transition: {
+            delay: custom * 0.2,
+            duration: 0.3,
+            ease: 'easeInOut',
+        },
+    }),
+};
 
 // Функциональный компонент для отображения профессий
 const Professions = () => {
@@ -60,45 +78,46 @@ const Professions = () => {
                         ) : (
                             <div>
                                 {categories.map((category, index) => (
-                                    <Glow
-                                        className="flex flex-col "
-                                        key={index}
-                                    >
+                                    <div className="flex flex-col" key={index}>
                                         <div id={category.category}></div>
-                                        <div
+                                        <motion.div
+                                            variants={animation}
+                                            custom={1}
+                                            initial="hidden"
+                                            animate="visible"
                                             className={`flex sticky top-[65px] bg-[#0E0C0A]/80 backdrop-blur text-white border-[1px] border-[white]/80 rounded-[7px] items-center justify-center max-h-[50px] mt-[26px] pointer-events-none select-none`}
                                         >
                                             <h1 className="text-[22px] font-medium">
                                                 {category.category}
                                             </h1>
-                                        </div>
-                                        <div className="flex gap-y-[25px] justify-between pt-[26px] flex-1 flex-wrap ">
+                                        </motion.div>
+                                        <motion.div
+                                            variants={animation}
+                                            custom={3}
+                                            initial="hidden"
+                                            animate="visible"
+                                            className="flex gap-y-[25px] justify-between pt-[26px] flex-1 flex-wrap "
+                                        >
                                             {category.professions.map(
                                                 (profession) => (
-                                                    <>
-                                                        <ProfessionCard
-                                                            key={profession.id}
-                                                            style={glowStyle}
-                                                            title={
-                                                                profession.name
-                                                            }
-                                                            level={
-                                                                profession.level
-                                                            }
-                                                            salary={
-                                                                profession.salary
-                                                            }
-                                                            onClick={() =>
-                                                                handleOpenProfessionModal(
-                                                                    profession.id
-                                                                )
-                                                            }
-                                                        />
-                                                    </>
+                                                    <ProfessionCard
+                                                        key={profession.id}
+                                                        style={glowStyle}
+                                                        title={profession.name}
+                                                        level={profession.level}
+                                                        salary={
+                                                            profession.salary
+                                                        }
+                                                        onClick={() =>
+                                                            handleOpenProfessionModal(
+                                                                profession.id
+                                                            )
+                                                        }
+                                                    />
                                                 )
                                             )}
-                                        </div>
-                                    </Glow>
+                                        </motion.div>
+                                    </div>
                                 ))}
                             </div>
                         )}

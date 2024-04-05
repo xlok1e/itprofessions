@@ -8,7 +8,7 @@ export interface ProfessionInterface {
     skills: string;
     work: string;
     level: levels;
-    enter: string;
+    enter: number;
     salary: string;
     salaryText?: string;
 }
