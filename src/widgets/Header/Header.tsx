@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Input } from '@/components/ui/input.tsx';
+
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -24,11 +25,20 @@ import {
 } from '@/components/ui/accordion';
 import { Menu } from 'lucide-react';
 import { fetchCategories } from '@/entities/Professions/api/api.ts';
-import { CategoryInterface } from '@/entities/Professions/api/types.ts';
+import {
+    CategoryInterface,
+    ProfessionInterface,
+} from '@/entities/Professions/api/types.ts';
+import { ProfessionModal } from '@/widgets/ProfessionModal/ProfessionModal.tsx';
 
 const Header = () => {
     const [categories, setCategories] = useState<CategoryInterface[]>([]);
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+    const [searchText, setSearchText] = useState('');
+    const [results, setResults] = useState<ProfessionInterface[]>([]);
+    const [clickedProfession, setClickedProfession] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -47,6 +57,36 @@ const Header = () => {
         setIsBurgerOpen(!isBurgerOpen);
     };
 
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchText(event.target.value);
+        setIsDropdownVisible(true);
+
+        const inputText = event.target.value.toLowerCase().split(' ');
+
+        const filteredResults = categories
+            .flatMap((category) => category.professions)
+            .filter((profession) => {
+                const professionName = profession.name.toLowerCase();
+                return inputText.every((word) => professionName.includes(word));
+            });
+
+        if (inputText.join('') === '') {
+            setResults([]);
+            return;
+        }
+
+        setTimeout(() => setResults(filteredResults), 700);
+    };
+
+    const handleCloseProfessionModal = () => {
+        setClickedProfession(0);
+    };
+
+    const handleInputBlur = () => {
+        setTimeout(() => {
+            setIsDropdownVisible(false);
+        }, 100);
+    };
     return (
         <>
             <div className="bg-[#0F0E0B]/90 border-b-[1px] border-[white]/10 fixed w-full z-[1] backdrop-blur">
@@ -94,7 +134,26 @@ const Header = () => {
                         <Input
                             placeholder="Поиск профессий"
                             className="w-[290px] h-[36px] bg-[#26211B] border-[1px] border-white text-white rounded-[10px] px-4 max-[812px]:hidden"
+                            value={searchText}
+                            onChange={handleSearchChange}
+                            onBlur={handleInputBlur}
+                            onFocus={() => setIsDropdownVisible(true)}
                         />
+
+                        {isDropdownVisible && results.length > 0 && (
+                            <div className="absolute bg-white top-[55px] p-[14px] rounded-[7px] text-[16px] cursor-pointer w-[290px]">
+                                {results.map((profession) => (
+                                    <div
+                                        onClick={() =>
+                                            setClickedProfession(profession.id)
+                                        }
+                                        className="p-[5px] hover:bg-gray-200 rounded-[5px] break-words"
+                                    >
+                                        {profession.name}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                         <Sheet
                             onOpenChange={toggleBurgerMenu}
                             open={isBurgerOpen}
@@ -154,6 +213,12 @@ const Header = () => {
                     </div>
                 </div>
             </div>
+
+            <ProfessionModal
+                id={clickedProfession}
+                close={handleCloseProfessionModal}
+                setClickedProfession={setClickedProfession}
+            />
         </>
     );
 };

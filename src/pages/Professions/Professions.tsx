@@ -91,32 +91,32 @@ const Professions = () => {
                                                 {category.category}
                                             </h1>
                                         </motion.div>
-                                        <motion.div
-                                            variants={animation}
-                                            custom={3}
-                                            initial="hidden"
-                                            animate="visible"
-                                            className="flex gap-y-[25px] justify-between pt-[26px] flex-1 flex-wrap "
-                                        >
+                                        <div className="flex gap-y-[25px] justify-between pt-[26px] flex-1 flex-wrap ">
                                             {category.professions.map(
                                                 (profession) => (
-                                                    <ProfessionCard
-                                                        key={profession.id}
-                                                        style={glowStyle}
-                                                        title={profession.name}
-                                                        level={profession.level}
-                                                        salary={
-                                                            profession.salary
-                                                        }
-                                                        onClick={() =>
-                                                            handleOpenProfessionModal(
-                                                                profession.id
-                                                            )
-                                                        }
-                                                    />
+                                                    <>
+                                                        <ProfessionCard
+                                                            key={profession.id}
+                                                            style={glowStyle}
+                                                            title={
+                                                                profession.name
+                                                            }
+                                                            level={
+                                                                profession.level
+                                                            }
+                                                            salary={
+                                                                profession.salary
+                                                            }
+                                                            onClick={() =>
+                                                                handleOpenProfessionModal(
+                                                                    profession.id
+                                                                )
+                                                            }
+                                                        />
+                                                    </>
                                                 )
                                             )}
-                                        </motion.div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -127,6 +127,7 @@ const Professions = () => {
             <ProfessionModal
                 id={clickedProfession}
                 close={handleCloseProfessionModal}
+                setClickedProfession={setClickedProfession}
             />
         </div>
     );

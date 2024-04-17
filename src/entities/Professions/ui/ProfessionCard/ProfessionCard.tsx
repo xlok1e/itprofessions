@@ -1,6 +1,7 @@
 import { Zap } from 'lucide-react';
 import { FC } from 'react';
 import { ProfessionCardInterface } from '@/entities/Professions/ui/ProfessionCard/types.ts';
+import { motion } from 'framer-motion';
 
 const ProfessionCard: FC<ProfessionCardInterface> = ({
     title,
@@ -9,8 +10,25 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
     style,
     onClick,
 }) => {
+    // const animation = {
+    //     hidden: {
+    //         opacity: 0,
+    //     },
+    //     visible: (custom: number) => ({
+    //         opacity: 1,
+    //         transition: {
+    //             delay: custom * 0.2,
+    //             duration: 0.3,
+    //         },
+    //     }),
+    // };
+
     return (
-        <div
+        <motion.div
+            // variants={animation}
+            // custom={3}
+            // initial="hidden"
+            // animate="visible"
             onClick={onClick}
             className={`${style} flex flex-col justify-between w-[49%] h-[200px] border-white/40 bg-gray-400/5 border-[0.5px] rounded-[11px] p-[18px]
             max-[1000px]:w-[100%]`}
@@ -89,14 +107,14 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
                 </div>
                 <div className="flex flex-col text-white items-end">
                     <p className="font-medium text-[16px] max-[411px]:text-[14px]">
-                        Зарплата:
+                        Средняя зарплата:
                     </p>
                     <p className="text-[14px] max-[411px]:text-[12px]">
                         {salary}
                     </p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
