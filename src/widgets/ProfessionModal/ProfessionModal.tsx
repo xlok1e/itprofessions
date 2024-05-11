@@ -31,7 +31,7 @@ const ProfessionModal: FC<ProfessionDescriptionInterface> = ({
         .find((profession) => profession.id === id);
 
     const handleCloseModal = () => {
-        setClickedProfession(0);
+        setClickedProfession!(0);
     };
 
     return (
