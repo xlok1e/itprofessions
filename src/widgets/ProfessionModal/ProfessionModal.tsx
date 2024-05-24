@@ -9,6 +9,7 @@ const ProfessionModal: FC<ProfessionDescriptionInterface> = ({
     id,
     close,
     setClickedProfession,
+    disableArrow,
 }) => {
     const [categories, setCategories] = useState<CategoryInterface[]>([]);
 
@@ -39,7 +40,7 @@ const ProfessionModal: FC<ProfessionDescriptionInterface> = ({
             {filteredData && (
                 <DialogContent
                     className="max-w-[calc(100vw-200px)] overflow-y-scroll max-h-[calc(100vh-100px)]
-                max-[900px]:max-w-full max-[900px]:max-h-full max-[900px]:rounded-[0px] max-[900px]:border-none"
+                max-[900px]:max-w-full max-[900px]:max-h-full max-[900px]:rounded-[0px] max-[900px]:border-none no-scrollbar"
                 >
                     <X
                         color="white"
@@ -220,6 +221,11 @@ const ProfessionModal: FC<ProfessionDescriptionInterface> = ({
                             </div>
                         </div>
                     </div>
+                    {!disableArrow && (
+                        <p className="sticky mr-[16px] text-[14px] text-white opacity-[60%] bottom-0 ml-auto">
+                            Используйте &lt; и &gt; для смены карточки
+                        </p>
+                    )}
                 </DialogContent>
             )}
         </Dialog>

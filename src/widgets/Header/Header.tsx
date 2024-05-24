@@ -105,9 +105,9 @@ const Header = () => {
                                             Профессии
                                         </Link>
                                     </NavigationMenuTrigger>
-                                    <NavigationMenuContent className="flex flex-col w-fit h-fit p-[16px] text-[18px]">
+                                    <NavigationMenuContent className="flex flex-col w-fit h-fit p-[16px] text-[18px] backdrop-filter">
                                         {categories.map((category) => (
-                                            <NavigationMenuLink className="p-[5px] hover:bg-gray-200 rounded-[5px] w-[200px]">
+                                            <NavigationMenuLink className="p-[5px] hover:bg-[#FACC15]/10 rounded-[5px] w-[200px] ">
                                                 <HashLink
                                                     smooth
                                                     to={`/professions#${category.category}`}
@@ -124,9 +124,12 @@ const Header = () => {
                                 >
                                     Главная
                                 </Link>
-                                <li className="text-[18px] hover:text-[#FACC15]">
+                                <Link
+                                    to={`/professionsTop`}
+                                    className="text-[18px] hover:text-[#FACC15]"
+                                >
                                     Топ профессий
-                                </li>
+                                </Link>
                             </NavigationMenuList>
                         </NavigationMenu>
                     </nav>
@@ -141,13 +144,13 @@ const Header = () => {
                         />
 
                         {isDropdownVisible && results.length > 0 && (
-                            <div className="absolute bg-white top-[55px] p-[14px] rounded-[7px] text-[16px] cursor-pointer w-[290px]">
+                            <div className="absolute no-scrollbar bg-[#151515]/90 max-h-[400px] overflow-y-scroll top-[55px] p-[14px] rounded-[7px] text-[16px] cursor-pointer w-[290px] border-[1px] border-[#FACC15]/60 shadow-[0px_0px_5px_5px_rgba(250,204,21,0.08)]">
                                 {results.map((profession) => (
                                     <div
                                         onClick={() =>
                                             setClickedProfession(profession.id)
                                         }
-                                        className="p-[5px] hover:bg-gray-200 rounded-[5px] break-words"
+                                        className="p-[5px] hover:bg-[#FACC15]/10 text-white rounded-[5px] break-words "
                                     >
                                         {profession.name}
                                     </div>
@@ -202,7 +205,7 @@ const Header = () => {
                                         </AccordionItem>
                                     </Accordion>
                                     <Link
-                                        to={`#`}
+                                        to={`/professionsTop`}
                                         className="text-white text-[20px]"
                                     >
                                         Топ профессий
@@ -215,6 +218,7 @@ const Header = () => {
             </div>
 
             <ProfessionModal
+                disableArrow={true}
                 id={clickedProfession}
                 close={handleCloseProfessionModal}
                 setClickedProfession={setClickedProfession}

@@ -29,7 +29,8 @@
     "react-router-dom": "^6.22.3",
     "react-router-hash-link": "^2.4.3",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-filters": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.27",

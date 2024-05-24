@@ -1,7 +1,7 @@
 // Импорт необходимых компонентов и функций
 import { ProfessionCard } from '@/entities/Professions/ui/ProfessionCard/ProfessionCard.tsx';
 import { Glow, GlowCapture } from '@codaworks/react-glow';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CategoryInterface } from '@/entities/Professions/api/types.ts';
 import { fetchCategories } from '@/entities/Professions/api/api.ts';
 import { ProfessionModal } from '@/widgets/ProfessionModal/ProfessionModal.tsx';
@@ -65,11 +65,20 @@ const Professions = () => {
         setClickedProfession(0);
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'ArrowRight' && clickedProfession !== 0 ) {
+            setClickedProfession(prevState => prevState + 1);
+        } else if (event.key === 'ArrowLeft' && clickedProfession !== 0) {
+            setClickedProfession(prevState => prevState - 1);
+        }
+    };
+
     return (
-        <div className="bg-gradient-to-br from-[#0E0C0A] to-[#26211B]">
+        <div className="bg-gradient-to-br from-[#0E0C0A] to-[#26211B]" onKeyDown={handleKeyDown}>
             <GlowCapture>
-                <Glow className="pb-[26px] mt-[60px] ">
-                    <div className="container max-w-[1440px] max-[660px]:px-[30px] ">
+                <Glow>
+                    <div className="pb-[26px] mt-[60px]">
+                    <div className="container max-w-[1440px] max-[660px]:px-[30px]">
                         {isLoading ? (
                             // UI для состояния загрузки
                             <div className="flex h-screen items-center justify-center">
@@ -97,7 +106,7 @@ const Professions = () => {
                                                     <>
                                                         <ProfessionCard
                                                             key={profession.id}
-                                                            style={glowStyle}
+                                                            style={`${glowStyle} w-[49%] cursor-pointer`}
                                                             title={
                                                                 profession.name
                                                             }
@@ -121,6 +130,7 @@ const Professions = () => {
                                 ))}
                             </div>
                         )}
+                    </div>
                     </div>
                 </Glow>
             </GlowCapture>
