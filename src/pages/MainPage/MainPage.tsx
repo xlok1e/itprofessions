@@ -1,7 +1,7 @@
 import { MotionButton } from '@/components/ui/button.tsx';
 import { ArrowRight } from 'lucide-react';
-// import Wave1 from '@/components/assets/wave1.svg';
-// import Wave2 from '@/components/assets/wave2.svg';
+import Wave1 from '@/components/assets/wave1.svg';
+import Wave2 from '@/components/assets/wave2.svg';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -24,16 +24,16 @@ const textAnimation = {
 const MainPage = () => {
     return (
         <>
-            {/*<img*/}
-            {/*    src={Wave1}*/}
-            {/*    className="absolute top-[45%] left-[20px]"*/}
-            {/*    alt="Wave 1"*/}
-            {/*/>*/}
-            {/*<img*/}
-            {/*    src={Wave2}*/}
-            {/*    className="absolute top-[22%] left-[60%] "*/}
-            {/*    alt="Wave 2"*/}
-            {/*/>*/}
+            <img
+                src={Wave1}
+                className="invisible absolute top-[45%] left-[20px] max-[1400px]:left-[-40px] xl:visible animate-revealFromLeft"
+                alt="Wave 1"
+            />
+            <img
+                src={Wave2}
+                className="invisible absolute top-[22%] left-[60%] xl:visible"
+                alt="Wave 2"
+            />
             <div
                 className="absolute -z-1 m-auto top-0 left-0 bottom-0 right-0 w-[450px] h-[450px] rounded-full mix-blend-overlay bg-[#FACC15] opacity-[55%] blur-[105px]
             max-[700px]:w-[350px] max-[700px]:h-[350px] select-none"

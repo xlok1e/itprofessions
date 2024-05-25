@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { Input } from '@/components/ui/input.tsx';
 
@@ -39,6 +39,8 @@ const Header = () => {
     const [searchText, setSearchText] = useState('');
     const [results, setResults] = useState<ProfessionInterface[]>([]);
     const [clickedProfession, setClickedProfession] = useState(0);
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -93,42 +95,55 @@ const Header = () => {
                 <div className="container max-w-[1440px] max-[540px]:px-[30px] flex justify-between items-center pt-[17px] pb-[17px] h-[60px] gap-[20px]">
                     <Link to={`/`}>
                         <div className="text-white text-[26px] font-bold">
-                            LOGO
+                            &lt;
+                            <span className="text-[#FACC15] animate-rainbow">
+                                /IT-Атлас
+                            </span>
+                            &gt;
                         </div>
                     </Link>
                     <nav className="text-white">
                         <NavigationMenu className="max-[1130px]:hidden">
                             <NavigationMenuList className="flex gap-9">
                                 <NavigationMenuItem>
-                                    <NavigationMenuTrigger className="p-[5px]">
+                                    <NavigationMenuTrigger
+                                        className={`p-[5px] transition-all ease hover:opacity-[100%] ${currentPath === `/professions` ? 'opacity-[100%]' : 'opacity-[70%]'}`}
+                                    >
                                         <Link to={`/professions`}>
                                             Профессии
                                         </Link>
                                     </NavigationMenuTrigger>
                                     <NavigationMenuContent className="flex flex-col w-fit h-fit p-[16px] text-[18px] backdrop-filter">
                                         {categories.map((category) => (
-                                            <NavigationMenuLink className="p-[5px] hover:bg-[#FACC15]/10 rounded-[5px] w-[200px] ">
-                                                <HashLink
-                                                    smooth
-                                                    to={`/professions#${category.category}`}
-                                                >
+                                            <HashLink
+                                                smooth
+                                                className="p-[5px] hover:bg-[#FACC15]/10 rounded-[5px] w-[200px]"
+                                                to={`/professions#${category.category}`}
+                                            >
+                                                <NavigationMenuLink>
                                                     {category.category}
-                                                </HashLink>
-                                            </NavigationMenuLink>
+                                                </NavigationMenuLink>
+                                            </HashLink>
                                         ))}
                                     </NavigationMenuContent>
                                 </NavigationMenuItem>
                                 <Link
                                     to={`/`}
-                                    className="text-[18px] hover:text-[#FACC15]"
+                                    className={`text-[18px] hover:text-[#FACC15] transition-all ease ${currentPath === `/` ? 'opacity-[100%]' : 'opacity-[70%] hover:opacity-[100%]'}`}
                                 >
                                     Главная
                                 </Link>
                                 <Link
                                     to={`/professionsTop`}
-                                    className="text-[18px] hover:text-[#FACC15]"
+                                    className={`text-[18px] hover:text-[#FACC15] transition-all ease ${currentPath === `/professionsTop` ? 'opacity-[100%]' : 'opacity-[70%] hover:opacity-[100%]'}`}
                                 >
                                     Топ профессий
+                                </Link>
+                                <Link
+                                    to={`/about`}
+                                    className={`text-[18px] hover:text-[#FACC15] transition-all ease ${currentPath === `/about` ? 'opacity-[100%]' : 'opacity-[70%] hover:opacity-[100%]'}`}
+                                >
+                                    О проекте
                                 </Link>
                             </NavigationMenuList>
                         </NavigationMenu>
@@ -167,7 +182,11 @@ const Header = () => {
                             <SheetContent>
                                 <SheetHeader>
                                     <h2 className="flex text-white text-[30px] font-bold items-center justify-center mt-[15px]">
-                                        LOGO
+                                        &lt;
+                                        <span className="text-[#FACC15] animate-rainbow">
+                                            /IT-Атлас
+                                        </span>
+                                        &gt;
                                     </h2>
                                 </SheetHeader>
                                 <div className="flex flex-col mt-[30px]">
@@ -207,10 +226,18 @@ const Header = () => {
                                     <Link
                                         to={`/professionsTop`}
                                         className="text-white text-[20px]"
+                                        onClick={toggleBurgerMenu}
                                     >
                                         Топ профессий
                                     </Link>
                                 </div>
+                                <Link
+                                    to={`/about`}
+                                    className="text-white text-[16px] bottom-5 absolute"
+                                    onClick={toggleBurgerMenu}
+                                >
+                                    О проекте
+                                </Link>
                             </SheetContent>
                         </Sheet>
                     </div>

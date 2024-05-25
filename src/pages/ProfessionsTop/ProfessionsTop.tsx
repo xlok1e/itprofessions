@@ -129,8 +129,6 @@ const ProfessionsTop = () => {
         findAndSetProfessionsByIds();
     }, [professions, categories]);
 
-    console.log(findProfessions);
-
     return (
         <div className="bg-gradient-to-br from-[#0E0C0A] to-[#26211B]">
             <GlowCapture>
@@ -148,7 +146,7 @@ const ProfessionsTop = () => {
                                 <div>
                                     {getTitle.map((item, index) => (
                                         <div
-                                            className="flex flex-col"
+                                            className="flex flex-col "
                                             key={index}
                                         >
                                             <motion.div
@@ -158,22 +156,23 @@ const ProfessionsTop = () => {
                                                 animate="visible"
                                                 className={`flex sticky top-[65px] bg-[#0E0C0A]/80 backdrop-blur text-white border-[1px] border-[white]/80 rounded-[7px] items-center justify-center max-h-[50px] mt-[26px] pointer-events-none select-none`}
                                             >
-                                                <h1 className="text-[22px] font-medium">
+                                                <h1 className="text-[22px] font-medium max-[560px]:text-[18px] max-[420px]:text-[16px]">
                                                     {item}
                                                 </h1>
                                             </motion.div>
-                                            <div className="flex gap-y-[25px] pt-[26px] justify-between flex-1 flex-wrap">
+                                            <div className="flex justify-between max-[1430px]:flex-col">
                                                 {findProfessions
                                                     .slice(
                                                         index * 3,
                                                         index * 3 + 3
                                                     )
-                                                    .map((profession) => (
-                                                        <div className="flex gap-x-[5px] w-[32%]">
+                                                    .map((profession, key) => (
+                                                        <div className="flex gap-[5px] mt-[26px] max-[550px]:flex-col">
                                                             <div
-                                                                className={`${glowStyle} flex w-[60px] h-[200px] border-white/40 border-[0.5px] rounded-[7px] bg-gray-400/5 text-white text-[15px] items-center justify-center`}
+                                                                className={`${glowStyle} flex w-[60px] h-[200px] border-white/40 border-[0.5px] rounded-[7px] bg-gray-400/5 text-white text-[15px] items-center justify-center
+                                                                max-[550px]:w-[100%] max-[550px]:h-[35px]`}
                                                             >
-                                                                1
+                                                                {key + 1}
                                                             </div>
                                                             <ProfessionCard
                                                                 title={
@@ -182,7 +181,7 @@ const ProfessionsTop = () => {
                                                                 level={
                                                                     profession.level
                                                                 }
-                                                                style={`${glowStyle} w-[100%] cursor-pointer`}
+                                                                style={`${glowStyle} w-[340px] cursor-pointer max-[1430px]:w-[100%]`}
                                                                 salary={
                                                                     profession.salary
                                                                 }
