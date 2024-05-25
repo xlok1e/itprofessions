@@ -34,13 +34,9 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
             max-[1000px]:w-[100%] overflow-hidden`}
         >
             <p
-                className="font-bold text-[22px] text-start text-white truncate
-            max-[1295px]:text-[20px]
-            max-[660px]:text-[18px]
-            max-[500px]:text-[16px]
-            max-[450px]:text-[14px]
-            max-[450px]:max-w-[70%]
-            max-[411px]:text-[12px]"
+                className=" flex font-bold text-[24px] text-start text-white text-wrap
+            max-[1295px]:text-[18px]
+            max-[411px]:w-[250px]"
             >
                 {title}
             </p>

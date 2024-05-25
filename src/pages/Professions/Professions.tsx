@@ -66,71 +66,79 @@ const Professions = () => {
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
-        if (event.key === 'ArrowRight' && clickedProfession !== 0 ) {
-            setClickedProfession(prevState => prevState + 1);
+        if (event.key === 'ArrowRight' && clickedProfession !== 0) {
+            setClickedProfession((prevState) => prevState + 1);
         } else if (event.key === 'ArrowLeft' && clickedProfession !== 0) {
-            setClickedProfession(prevState => prevState - 1);
+            setClickedProfession((prevState) => prevState - 1);
         }
     };
 
     return (
-        <div className="bg-gradient-to-br from-[#0E0C0A] to-[#26211B]" onKeyDown={handleKeyDown}>
+        <div
+            className="bg-gradient-to-br from-[#0E0C0A] to-[#26211B] overflow-hidden"
+            onKeyDown={handleKeyDown}
+        >
             <GlowCapture>
                 <Glow>
                     <div className="pb-[26px] mt-[60px]">
-                    <div className="container max-w-[1440px] max-[660px]:px-[30px]">
-                        {isLoading ? (
-                            // UI для состояния загрузки
-                            <div className="flex h-screen items-center justify-center">
-                                <div className="h-10 w-10 animate-spin rounded-full border-[5px] border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-                            </div>
-                        ) : (
-                            <div>
-                                {categories.map((category, index) => (
-                                    <div className="flex flex-col" key={index}>
-                                        <div id={category.category}></div>
-                                        <motion.div
-                                            variants={animation}
-                                            custom={1}
-                                            initial="hidden"
-                                            animate="visible"
-                                            className={`flex sticky top-[65px] bg-[#0E0C0A]/80 backdrop-blur text-white border-[1px] border-[white]/80 rounded-[7px] items-center justify-center max-h-[50px] mt-[26px] pointer-events-none select-none`}
+                        <div className="container max-w-[1440px] max-[660px]:px-[30px]">
+                            {isLoading ? (
+                                // UI для состояния загрузки
+                                <div className="flex h-screen items-center justify-center">
+                                    <div className="h-10 w-10 animate-spin rounded-full border-[5px] border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+                                </div>
+                            ) : (
+                                <div>
+                                    {categories.map((category, index) => (
+                                        <div
+                                            className="flex flex-col"
+                                            key={index}
                                         >
-                                            <h1 className="text-[22px] font-medium">
-                                                {category.category}
-                                            </h1>
-                                        </motion.div>
-                                        <div className="flex gap-y-[25px] justify-between pt-[26px] flex-1 flex-wrap ">
-                                            {category.professions.map(
-                                                (profession) => (
-                                                    <>
-                                                        <ProfessionCard
-                                                            key={profession.id}
-                                                            style={`${glowStyle} w-[49%] cursor-pointer`}
-                                                            title={
-                                                                profession.name
-                                                            }
-                                                            level={
-                                                                profession.level
-                                                            }
-                                                            salary={
-                                                                profession.salary
-                                                            }
-                                                            onClick={() =>
-                                                                handleOpenProfessionModal(
+                                            <div id={category.category}></div>
+                                            <motion.div
+                                                variants={animation}
+                                                custom={1}
+                                                initial="hidden"
+                                                animate="visible"
+                                                className={`flex sticky top-[65px] bg-[#0E0C0A]/80 backdrop-blur text-white border-[1px] border-[white]/80 rounded-[7px] items-center justify-center max-h-[50px] mt-[26px] pointer-events-none select-none`}
+                                            >
+                                                <h1 className="text-[22px] font-medium">
+                                                    {category.category}
+                                                </h1>
+                                            </motion.div>
+                                            <div className="flex gap-y-[25px] justify-between pt-[26px] flex-1 flex-wrap ">
+                                                {category.professions.map(
+                                                    (profession) => (
+                                                        <>
+                                                            <ProfessionCard
+                                                                key={
                                                                     profession.id
-                                                                )
-                                                            }
-                                                        />
-                                                    </>
-                                                )
-                                            )}
+                                                                }
+                                                                style={`${glowStyle} w-[49%] cursor-pointer`}
+                                                                title={
+                                                                    profession.name
+                                                                }
+                                                                level={
+                                                                    profession.level
+                                                                }
+                                                                salary={
+                                                                    profession.salary
+                                                                }
+                                                                onClick={() =>
+                                                                    handleOpenProfessionModal(
+                                                                        profession.id
+                                                                    )
+                                                                }
+                                                            />
+                                                        </>
+                                                    )
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </Glow>
             </GlowCapture>

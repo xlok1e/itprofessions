@@ -94,10 +94,10 @@ const Header = () => {
             <div className="bg-[#0F0E0B]/90 border-b-[1px] border-[white]/10 fixed w-full z-[1] backdrop-blur">
                 <div className="container max-w-[1440px] max-[540px]:px-[30px] flex justify-between items-center pt-[17px] pb-[17px] h-[60px] gap-[20px]">
                     <Link to={`/`}>
-                        <div className="text-white text-[26px] font-bold">
-                            &lt;
+                        <div className="text-white text-[26px] font-bold max-[500px]:text-[20px] select-none">
+                            &lt;/
                             <span className="text-[#FACC15] animate-rainbow">
-                                /IT-Атлас
+                                IT-Атлас
                             </span>
                             &gt;
                         </div>
@@ -181,10 +181,10 @@ const Header = () => {
                             </SheetTrigger>
                             <SheetContent>
                                 <SheetHeader>
-                                    <h2 className="flex text-white text-[30px] font-bold items-center justify-center mt-[15px]">
-                                        &lt;
+                                    <h2 className="flex text-white text-[30px] font-bold items-center justify-center mt-[15px] select-none">
+                                        &lt;/
                                         <span className="text-[#FACC15] animate-rainbow">
-                                            /IT-Атлас
+                                            IT-Атлас
                                         </span>
                                         &gt;
                                     </h2>

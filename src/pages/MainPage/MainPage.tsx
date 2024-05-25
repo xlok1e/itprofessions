@@ -23,15 +23,15 @@ const textAnimation = {
 
 const MainPage = () => {
     return (
-        <>
+        <div className="overflow-hidden">
             <img
                 src={Wave1}
-                className="invisible absolute top-[45%] left-[20px] max-[1400px]:left-[-40px] xl:visible animate-revealFromLeft"
+                className="hidden absolute top-[45%] left-[20px] max-[1400px]:left-[-40px] xl:flex animate-revealFromLeft"
                 alt="Wave 1"
             />
             <img
                 src={Wave2}
-                className="invisible absolute top-[22%] left-[60%] xl:visible"
+                className="hidden absolute top-[22%] left-[60%] xl:flex"
                 alt="Wave 2"
             />
             <div
@@ -88,7 +88,7 @@ const MainPage = () => {
                     </Link>
                 </div>
             </motion.div>
-        </>
+        </div>
     );
 };
 
