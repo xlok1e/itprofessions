@@ -222,7 +222,7 @@ const ProfessionModal: FC<ProfessionDescriptionInterface> = ({
                         </div>
                     </div>
                     {!disableArrow && (
-                        <p className="sticky mr-[16px] text-[14px] text-white opacity-[60%] bottom-0 ml-auto">
+                        <p className="sticky mr-[16px] text-[14px] text-white opacity-[60%] bottom-0 ml-auto max-[1200px]:hidden">
                             Используйте &lt; и &gt; для смены карточки
                         </p>
                     )}

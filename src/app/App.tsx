@@ -5,6 +5,7 @@ import Professions from '@/pages/Professions/Professions.tsx';
 import { Helmet } from 'react-helmet';
 import ProfessionsTop from '@/pages/ProfessionsTop/ProfessionsTop.tsx';
 import AboutProject from '@/pages/AboutProject/AboutProject.tsx';
+import Error404 from '@/pages/Error404/Error404.tsx';
 
 function App() {
     return (
@@ -28,7 +29,7 @@ function App() {
                 <Route path="/professions" element={<Professions />} />
                 <Route path="/professionsTop" element={<ProfessionsTop />} />
                 <Route path="/about" element={<AboutProject />} />
-                <Route path="*" element={<div>Not Found</div>} />
+                <Route path="*" element={<Error404 />} />
             </Routes>
         </>
     );
