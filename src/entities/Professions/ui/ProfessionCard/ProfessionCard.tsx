@@ -8,6 +8,7 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
     level,
     salary,
     style,
+    titleStyle,
     onClick,
 }) => {
     // const animation = {
@@ -34,17 +35,17 @@ const ProfessionCard: FC<ProfessionCardInterface> = ({
             max-[1000px]:w-[100%] overflow-hidden`}
         >
             <p
-                className=" flex font-bold text-[24px] text-start text-white text-wrap
+                className={`${titleStyle} flex font-bold text-[24px] text-start text-white text-wrap
             max-[1295px]:text-[18px]
-            max-[411px]:w-[250px]"
+            max-[500px]:w-[250px]`}
             >
                 {title}
             </p>
             <div className="flex flex-col gap-[5px]">
                 <p
-                    className="text-white text-[16px] flex-1 text-start
+                    className={` text-white text-[16px] flex-1 text-start
                 max-[450px]:text-[14px]
-                max-[411px]:text-[12px]"
+                max-[411px]:text-[12px]`}
                 >
                     Востребованность на рынке
                 </p>

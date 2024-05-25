@@ -182,6 +182,7 @@ const ProfessionsTop = () => {
                                                                     profession.level
                                                                 }
                                                                 style={`${glowStyle} w-[340px] cursor-pointer max-[1430px]:w-[100%]`}
+                                                                titleStyle="text-nowrap truncate"
                                                                 salary={
                                                                     profession.salary
                                                                 }

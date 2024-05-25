@@ -5,5 +5,6 @@ export interface ProfessionCardInterface {
     level: levels;
     salary: string;
     style?: string;
+    titleStyle?: string;
     onClick?: () => void;
 }
